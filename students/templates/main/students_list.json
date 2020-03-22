@@ -1,0 +1,8 @@
+"students":[
+{% for student in students %}
+{"id": "{{ student.id }}",
+"name": "{{ student.last_name }} {{ student.first_name }} {{ student.second_name }}"
+},
+{
+% endfor %}
+]

@@ -1,0 +1,8 @@
+"student":[
+{"id": "{{ students.id }}",
+"name": "{{ students.last_name }} {{ students.first_name }} {{ students.second_name }}",
+"telephone": "{{ contacts.telephone }}",
+"email": "{{ contacts.email }}",
+"placework": "{{ placework.departament }}"
+},
+]
