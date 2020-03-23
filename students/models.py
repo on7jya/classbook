@@ -18,9 +18,9 @@ class Contact(models.Model):
     main_contact = models.BooleanField(max_length=1)
 
     def __str__(self):
-        if self.main_contact:
+        if self.main_contact == '1':
             return self.telephone
-        elif not self.main_contact:
+        elif not self.main_contact == '0':
             return self.email
 
 
