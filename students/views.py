@@ -19,6 +19,6 @@ def get_student_info(request, id):
     # return HttpResponse('здесь будет подробная информация о студенте')
     return render(request=request,
                   template_name="main/student_info.json",
-                  context={"students": Fio(id=id),
-                           'contacts': Contact(Fio(id=id)),
-                           'placework': PlaceWork(Fio(id=id))})
+                  context={"students": Fio.objects.filter(id=id),
+                           'contacts': Contact.objects.filter(student=id),
+                           'placework': PlaceWork.objects.filter(student=id)})
