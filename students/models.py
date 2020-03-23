@@ -7,7 +7,7 @@ class Fio(models.Model):
     first_name = models.CharField(max_length=50)
     second_name = models.CharField(max_length=50)
 
-    def __str__(self, id):
+    def __str__(self):
         return str(self.id)
 
 
