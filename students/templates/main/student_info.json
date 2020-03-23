@@ -1,8 +1,14 @@
 "student":[
-{"id": "{{ students.id }}",
-"name": "{{ students.last_name }} {{ students.first_name }} {{ students.second_name }}",
-"telephone": "{{ contacts.telephone }}",
-"email": "{{ contacts.email }}",
-"placework": "{{ placework.departament }}"
-},
+  {% for student in students %}
+    {% for contact in contacts %}
+      {% for place in placework %}
+        {"id": "{{ student.id }}",
+        "name": "{{ student.last_name }} {{ student.first_name }} {{ student.second_name }}",
+        "telephone": "{{ contact.telephone }}",
+        "email": "{{ contact.email }}",
+        "placework": "{{ place.departament }}"
+        },
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
 ]
