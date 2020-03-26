@@ -19,11 +19,9 @@ from django.urls import path
 
 from . import views
 
-APP_NAME = 'students'
-
 urlpatterns = [
-    path('', views.homepage, name="homepage"),
-    path(r"api/v1/students/", views.get_students_list, name="students_list"),
-    path(r'api/v1/students/<int:id>', views.get_student_info, name="student_info"),
     url('admin/', admin.site.urls),
+    path('', views.get_homepage, name="get_homepage"),
+    path(r"api/v1/students/", views.get_students_list, name="students_list"),
+    path(r'api/v1/students/<int:user_id>', views.get_student_info, name="student_info"),
 ]
