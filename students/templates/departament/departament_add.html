@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Departament|Add{% endblock %}
+{% block content %}
+    <div class="col-md-9">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Департамент/Добавление</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form.as_p }}
+                </div>
+                <div class="panel-footer">
+                    <a href="{% url 'departament-list' %}">
+                        <button type="button" class="btn btn-danger">Отменить</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary ">Добавить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

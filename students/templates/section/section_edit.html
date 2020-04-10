@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Section|Edit{% endblock %}
+{% block content %}
+    <div class="col-md-9">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Отдел/Редактирование</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form.as_p }}
+                </div>
+                <div class="panel-footer">
+                    <a href="{% url 'section-add' %}">
+                        <button type="button" class="btn btn-info ">+ Отдел</button>
+                    </a>
+                    <a href="{% url 'departament-add' %}">
+                        <button type="button" class="btn btn-info ">+ Департамент</button>
+                    </a>
+                    <a href="{% url 'section-list' %}">
+                        <button type="button" class="btn btn-danger col-md-offset-6">Отменить</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary">Подтвердить</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

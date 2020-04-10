@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Student|Detail{% endblock %}
+{% block content %}
+    <h1>{{ student.last_name }} {{ student.first_name }} {{ student.second_name }}</h1>
+    <p><strong>Отдел: </strong> {{ student.division }}</p>
+{% endblock %}

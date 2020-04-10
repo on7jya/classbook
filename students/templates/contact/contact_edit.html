@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Contact|Edit{% endblock %}
+{% block content %}
+    <div class="col-md-9">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Контакты/Редактирование</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form.as_p }}
+                </div>
+                <div class="panel-footer">
+                    <a href="{% url 'contact-list' %}">
+                        <button type="button" class="btn btn-danger">Отменить</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary ">Подтвердить</button>
+
+                    <a href="{% url 'contact-add' %}">
+                        <button type="button" class="btn btn-info col-md-offset-5">+ Контакт</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

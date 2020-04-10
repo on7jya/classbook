@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Student|List{% endblock %}
+{% block content %}
+    <div class="col-md-9">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Студенты/Список ({{ students.count }})</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="box-scroll">
+                        {% if students %}
+                            <ul class="list-unstyled list-group">
+                                {% for student in students %}
+                                    <li class="list-group-item">
+                                        <a class="btn btn-danger btn-xs compon_glyphicon"
+                                           href="{% url 'student-delete' student.id %}">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                        <a class="btn btn-info btn-xs compon_glyphicon"
+                                           href="{% url 'student-edit' student.id %}">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                        <h4>
+                                            <a href="{% url 'student-edit' student.id %}">{{ student.last_name }} {{ student.first_name }} {{ student.second_name }}</a>
+                                        </h4>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>There are no students in the app.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a href="{% url 'student-add' %}">
+                        <button type="button" class="btn btn-info">Добавить</button>
+                    </a>
+                    <a href="{% url 'homepage' %}">
+                        <button type="button" class="btn btn-link">Домой</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
