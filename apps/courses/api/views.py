@@ -7,3 +7,8 @@ from .serializers import CourseSerializer
 class ListCoursesAPIView(generics.ListAPIView):
     serializer_class = CourseSerializer
     queryset = Course.objects.all().participators_count()
+
+
+class ReadUpdateDeleteCoursesAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CourseSerializer
+    queryset = Course.objects.all().participators_count()
