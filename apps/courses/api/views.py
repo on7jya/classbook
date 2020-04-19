@@ -10,7 +10,7 @@ from apps.students.api.serializers import StudentIdSerializer
 from apps.courses.api.serializers import CourseSerializer
 
 
-class ListCoursesAPIView(generics.ListAPIView):
+class ListCoursesAPIView(generics.ListCreateAPIView):
     serializer_class = CourseSerializer
     queryset = Course.objects.all().participators_count()
 
