@@ -231,3 +231,17 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
+
+# DJANGO REST FRAMEWORK
+# ------------------------------------------------------------------------------
+# https://www.django-rest-framework.org/api-guide/settings/
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'apps.base.pagination.BaseResultsSetPagination',
+}
