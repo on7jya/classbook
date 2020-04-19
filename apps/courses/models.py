@@ -66,3 +66,30 @@ class CourseParticipant(TimeStampedModel):
 
     def __str__(self):
         return f"{self.student} participate in {self.course}"
+
+
+class Lecture(TimeStampedModel):
+    id = models.CharField(
+        max_length=11,
+        primary_key=True,
+        default=custom_uuid,
+        editable=False,
+    )
+    name = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    topic = models.TextField()
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        related_name='course',
+        related_query_name='course'
+    )
+
+    class Meta:
+        db_table = 'lectures'
+
+    def __str__(self):
+        return self.name
