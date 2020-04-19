@@ -4,7 +4,8 @@ from rest_framework import generics
 
 from apps.base.mixins import ActionMixin
 from apps.courses.api import docs
-from apps.courses.models import Course, CourseParticipant
+from apps.courses.models import Course
+from apps.courses.services import AssignToCourseService, UnAssignFromCourseService
 from apps.students.api.serializers import StudentIdSerializer
 from apps.courses.api.serializers import CourseSerializer
 
@@ -25,7 +26,7 @@ class AssignToCourseAPIView(generics.GenericAPIView, ActionMixin):
     queryset = Course.objects.all()
 
     def perform_action(self, serializer):
-        CourseParticipant.objects.get_or_create(course=self.get_object(), student=serializer.validated_data['student'])
+        AssignToCourseService(course=self.get_object(), validated_data=serializer.validated_data).execute()
 
 
 @method_decorator(name='post', decorator=swagger_auto_schema(**docs.course_unassign))
@@ -34,5 +35,4 @@ class UnAssignCourseAPIView(generics.GenericAPIView, ActionMixin):
     queryset = Course.objects.all()
 
     def perform_action(self, serializer):
-        CourseParticipant.objects.filter(
-            course=self.get_object(), student=serializer.validated_data['student']).delete()
+        UnAssignFromCourseService(course=self.get_object(), validated_data=serializer.validated_data).execute()
