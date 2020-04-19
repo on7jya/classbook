@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.models import TimeStampedModel
-
+from .managers import StudentManager
 from apps.base.utils import custom_uuid
 
 
@@ -23,9 +23,14 @@ class Student(TimeStampedModel):
     email = models.EmailField(
         _("email address"),
     )
+    objects = StudentManager()
 
     class Meta:
         db_table = "students"
 
     def __str__(self):
+        return self.full_name
+
+    @property
+    def full_name(self):
         return f"{self.first_name} {self.last_name}"
