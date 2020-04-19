@@ -1,4 +1,5 @@
 from .models import CourseParticipant
+from .api.exceptions import AlreadyAssigned, AlreadyUnAssigned
 
 
 class AssignToCourseService:
@@ -7,7 +8,9 @@ class AssignToCourseService:
         self.student = validated_data['student']
 
     def execute(self):
-        CourseParticipant.objects.get_or_create(course=self.course, student=self.student)
+        obj, created = CourseParticipant.objects.get_or_create(course=self.course, student=self.student)
+        if not created:
+            raise AlreadyAssigned()
 
 
 class UnAssignFromCourseService:
@@ -16,4 +19,6 @@ class UnAssignFromCourseService:
         self.student = validated_data['student']
 
     def execute(self):
-        CourseParticipant.objects.filter(course=self.course, student=self.student).delete()
+        obj, created = CourseParticipant.objects.filter(course=self.course, student=self.student).delete()
+        if not created:
+            raise AlreadyUnAssigned()
