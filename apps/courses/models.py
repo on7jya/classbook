@@ -1,7 +1,9 @@
 from django.db import models
-from django_extensions.db.models import TimeStampedModel
-from apps.base.utils import custom_uuid
 from django.utils.translation import gettext_lazy as _
+from django_extensions.db.models import TimeStampedModel
+
+from apps.base.utils import custom_uuid
+from .managers import CourseManager
 
 
 class Course(TimeStampedModel):
@@ -30,6 +32,8 @@ class Course(TimeStampedModel):
         null=True,
         blank=True,
     )
+
+    objects = CourseManager()
 
     class Meta:
         db_table = 'courses'
