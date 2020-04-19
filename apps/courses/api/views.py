@@ -4,10 +4,10 @@ from rest_framework import generics
 
 from apps.base.mixins import ActionMixin
 from apps.courses.api import docs
-from apps.courses.models import Course
-from apps.courses.services import AssignToCourseService, UnAssignFromCourseService
+from apps.courses.models import Course, CourseParticipant
+from apps.courses.services import AssignToCourseService, UnAssignFromCourseService, GetStudentsFromCourseService
 from apps.students.api.serializers import StudentIdSerializer
-from apps.courses.api.serializers import CourseSerializer
+from apps.courses.api.serializers import CourseSerializer, CourseParticipantSerializer
 
 
 class ListCoursesAPIView(generics.ListCreateAPIView):
@@ -18,6 +18,14 @@ class ListCoursesAPIView(generics.ListCreateAPIView):
 class ReadUpdateDeleteCoursesAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CourseSerializer
     queryset = Course.objects.all().participators_count()
+
+
+class ListStudentsLearnCoursesAPIView(generics.ListCreateAPIView):
+    serializer_class = CourseParticipantSerializer
+    queryset = CourseParticipant.objects.all()
+
+    def perform_action(self, serializer):
+        GetStudentsFromCourseService(course=self.get_object(), validated_data=serializer.validated_data).execute()
 
 
 @method_decorator(name='post', decorator=swagger_auto_schema(**docs.course_assign))

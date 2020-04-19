@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.courses.models import Course
+from apps.courses.models import Course, CourseParticipant, Lecture
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -9,3 +9,11 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('id', 'name', 'start_date', 'end_date', 'students_count')
+
+
+class CourseParticipantSerializer(serializers.ModelSerializer):
+    course = CourseSerializer
+
+    class Meta:
+        model = CourseParticipant
+        fields = ('id', 'course', 'student', 'is_completed')
