@@ -4,10 +4,10 @@ from rest_framework import generics
 
 from apps.base.mixins import ActionMixin
 from apps.courses.api import docs
-from apps.courses.models import Course, CourseParticipant
+from apps.courses.models import Course, CourseParticipant, Lecture
 from apps.courses.services import AssignToCourseService, UnAssignFromCourseService, GetStudentsFromCourseService
 from apps.students.api.serializers import StudentIdSerializer
-from apps.courses.api.serializers import CourseSerializer, CourseParticipantSerializer
+from apps.courses.api.serializers import CourseSerializer, CourseParticipantSerializer, LectureSerializer
 
 
 class ListCoursesAPIView(generics.ListCreateAPIView):
@@ -44,3 +44,18 @@ class UnAssignCourseAPIView(generics.GenericAPIView, ActionMixin):
 
     def perform_action(self, serializer):
         UnAssignFromCourseService(course=self.get_object(), validated_data=serializer.validated_data).execute()
+
+
+class ListLecturesApiView(generics.ListAPIView):
+    serializer_class = LectureSerializer
+    queryset = Lecture.objects.all()
+
+
+class RUDLecturesApiView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = LectureSerializer
+    queryset = Lecture.objects.all()
+
+
+class CreateLectureApiView(generics.CreateAPIView):
+    serializer_class = LectureSerializer
+    queryset = Lecture.objects.all()

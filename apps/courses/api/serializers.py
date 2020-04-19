@@ -17,3 +17,11 @@ class CourseParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseParticipant
         fields = ('id', 'course', 'student', 'is_completed')
+
+
+class LectureSerializer(serializers.ModelSerializer):
+    course = CourseSerializer
+
+    class Meta:
+        model = Lecture
+        fields = ['name', 'topic', 'course']
