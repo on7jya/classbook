@@ -2,8 +2,10 @@ import pytest
 from rest_framework import status
 
 from apps.base.test_mixins import GetResponseMixin
-from apps.courses.api.views import ListCoursesAPIView, ListLecturesApiView
+from apps.courses.api.views import ListCoursesAPIView, ListLecturesApiView, ReadUpdateDeleteCoursesAPIView
 from .factories import CourseFactory, LectureFactory
+
+pytestmark = pytest.mark.django_db
 
 
 class TestListMenuItemsAPIView(GetResponseMixin):
@@ -32,3 +34,16 @@ class TestListLecturesApiView(GetResponseMixin):
     @staticmethod
     def set_data():
         [LectureFactory() for i in range(3)]
+
+# class TestCourseItemAPIView(GetResponseMixin):
+#     URL = 'courses:courses-detail'
+#     VIEW = ReadUpdateDeleteCoursesAPIView
+#
+#     def test_get_list(self, request_factory):
+#         self.set_data()
+#         response = self.get_response(request_factory)
+#         assert response.status_code == status.HTTP_200_OK
+#
+#     @staticmethod
+#     def set_data():
+#         [CourseFactory() for i in range(3)]
